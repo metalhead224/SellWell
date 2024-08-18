@@ -4,7 +4,6 @@ using IdentityService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace IdentityService.Pages.Register
@@ -17,6 +16,7 @@ namespace IdentityService.Pages.Register
         public Index(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
+            Input = new RegisterViewModel();
         }
 
         [BindProperty]
@@ -48,15 +48,19 @@ namespace IdentityService.Pages.Register
                     EmailConfirmed = true
                 };
 
-                var result = await _userManager.CreateAsync(user, Input.Password);
-
-                if (result.Succeeded)
+                if (!string.IsNullOrEmpty(Input.Password) && !string.IsNullOrEmpty(Input.FullName))
                 {
-                    await _userManager.AddClaimsAsync(user, new Claim[]
+                    var result = await _userManager.CreateAsync(user, Input.Password);
+
+                    if (result.Succeeded)
                     {
+                        await _userManager.AddClaimsAsync(user, new Claim[]
+                        {
                        new Claim(JwtClaimTypes.Name, Input.FullName)
-                    });
-                };
+                        });
+                    };
+                }
+
 
                 RegisterSuccess = true;
             }

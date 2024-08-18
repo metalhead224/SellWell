@@ -17,20 +17,31 @@ namespace IdentityService.Services
         public CustomProfileService(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            
+
         }
         public async Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
             var user = await _userManager.GetUserAsync(context.Subject);
-            var existingClaims = await _userManager.GetClaimsAsync(user);
 
-            var claims = new List<Claim>
+            if (user != null)
             {
-                new Claim("username", user.UserName)
-            };
+                var existingClaims = await _userManager.GetClaimsAsync(user);
 
-            context.IssuedClaims.AddRange(claims);
-            context.IssuedClaims.Add(existingClaims.FirstOrDefault(x => x.Type == JwtClaimTypes.Name));
+                var claims = new List<Claim>();
+
+                if (!string.IsNullOrEmpty(user.UserName))
+                {
+                    new Claim("username", user.UserName);
+                }
+
+                context.IssuedClaims.AddRange(claims);
+                var nameClaim = existingClaims.FirstOrDefault(x => x.Type == JwtClaimTypes.Name);
+
+                if (nameClaim != null)
+                {
+                    context.IssuedClaims.AddRange(claims);
+                }
+            }
         }
 
         public Task IsActiveAsync(IsActiveContext context)
