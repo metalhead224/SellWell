@@ -58,7 +58,7 @@ public class AuctionsController : ControllerBase
 
         var result = await _repo.SaveChangesAsync();
 
-        if (!result) return BadRequest();
+        if (!result) return BadRequest("Could save the changes to DB!");
 
         return CreatedAtAction(nameof(GetAuctionById),
             new { auction.Id }, newAuction);
@@ -68,7 +68,7 @@ public class AuctionsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAuction(Guid id, UpdateAuctionDto updateAuctionDto)
     {
-        var auction = await _repo.GetAuctionEntityByIdAsync(id);
+        var auction = await _repo.GetAuctionEntityById(id);
 
         if (auction == null) return NotFound();
 
@@ -93,7 +93,7 @@ public class AuctionsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteAuction(Guid id)
     {
-        var auction = await _repo.GetAuctionEntityByIdAsync(id);
+        var auction = await _repo.GetAuctionEntityById(id);
 
         if (auction == null) return NotFound();
 
