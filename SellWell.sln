@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1ADCB988
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionService.UnitTests", "tests\AuctionService.UnitTests\AuctionService.UnitTests.csproj", "{BDBB0DAC-8226-4893-9B49-9AD2EBA4749E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionService.IntegrationTests", "tests\AuctionService.IntegrationTests\AuctionService.IntegrationTests.csproj", "{B9664598-FB47-497C-8E28-B76111B2B10B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{BDBB0DAC-8226-4893-9B49-9AD2EBA4749E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDBB0DAC-8226-4893-9B49-9AD2EBA4749E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDBB0DAC-8226-4893-9B49-9AD2EBA4749E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9664598-FB47-497C-8E28-B76111B2B10B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9664598-FB47-497C-8E28-B76111B2B10B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9664598-FB47-497C-8E28-B76111B2B10B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9664598-FB47-497C-8E28-B76111B2B10B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,5 +66,6 @@ Global
 		{8BC1CE62-C32D-4ACF-8497-581F1FC06DAD} = {C2846B04-865E-45D6-9639-1E07D651DE3C}
 		{B377FB55-1AD9-49DD-89E9-2F4C7BD5D0C0} = {C2846B04-865E-45D6-9639-1E07D651DE3C}
 		{BDBB0DAC-8226-4893-9B49-9AD2EBA4749E} = {1ADCB988-953D-4A63-B034-BAD5B4CDD64A}
+		{B9664598-FB47-497C-8E28-B76111B2B10B} = {1ADCB988-953D-4A63-B034-BAD5B4CDD64A}
 	EndGlobalSection
 EndGlobal
