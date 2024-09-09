@@ -1,23 +1,17 @@
-import Image from "next/image";
 import React from "react";
 import CountdownTimer from "./CountdownTimer";
+import CarImage from "./CarImage";
+import { Auction } from "../types/Index";
 
 type Props = {
-  auction: any;
+  auction: Auction;
 };
 
 export default function AuctionsCard({ auction }: Props) {
   return (
-    <a>
+    <a href="#" className="group">
       <div className="relative w-full bg-gray-200 aspect-[16/10] rounded-lg overflow-hidden">
-        <Image
-          src={auction.imageUrl}
-          alt={`Image of ${auction.make} ${auction.model} ${auction.color}`}
-          fill
-          priority
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-        />
+        <CarImage imageUrl={auction.imageUrl} />
         <div className="absolute left-2 bottom-2">
           <CountdownTimer auctionEnd={auction.auctionEnd} />
         </div>
