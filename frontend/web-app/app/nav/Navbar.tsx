@@ -1,17 +1,18 @@
-'use client'
+import React from "react";
+import Search from "./Search";
+import Logo from "./Logo";
+import LoginButton from "./LoginButton";
+import { getCurrentUser } from "../actions/authAction";
+import UserActions from "./UserActions";
 
-import React from 'react'
-import Search from './Search';
-import Logo from './Logo';
-import LoginButton from './LoginButton';
+export default async function Navbar() {
+  const user = await getCurrentUser();
 
-
-export default function Navbar() {
   return (
-    <header className='sticky top-0 z-50 flex justify-between p-5 font-gray-800 shadow-md items-center'>
-        <Logo />
-        <Search />
-        <LoginButton />
+    <header className="sticky top-0 z-50 flex justify-between p-5 font-gray-800 shadow-md items-center">
+      <Logo />
+      <Search />
+      {user ? <UserActions /> : <LoginButton />}
     </header>
-  )
+  );
 }
