@@ -23,12 +23,10 @@ namespace IdentityService.Services
             {
                 var existingClaims = await _userManager.GetClaimsAsync(user);
 
-                var claims = new List<Claim>();
-
-                if (!string.IsNullOrEmpty(user.UserName))
+                var claims = new List<Claim>
                 {
-                    new Claim("username", user.UserName);
-                }
+                    new Claim("username", user.UserName!)
+                };
 
                 context.IssuedClaims.AddRange(claims);
                 context.IssuedClaims.Add(existingClaims.FirstOrDefault(x => x.Type == JwtClaimTypes.Name)!);
