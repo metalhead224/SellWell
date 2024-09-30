@@ -1,7 +1,7 @@
 import React from 'react'
 import Heading from '../components/Heading'
 import { auth } from '@/auth'
-import AuthTest from './authTest';
+import AuthTest from './AuthTest';
 
 export default async function Session() {
     const session = await auth();
