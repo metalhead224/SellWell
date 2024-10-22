@@ -5,7 +5,6 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:7001",
       "_comment": "notice we have remove /******applicationUrl*****/ from here because we have",
       "_commentContinue":  "included webApi in appSettings.Development.Json and added server config there",
       "environmentVariables": {
