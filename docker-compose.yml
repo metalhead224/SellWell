@@ -105,3 +105,17 @@ services:
     depends_on:
       - mongodb
       - rabbitmq
+
+  notify-svc:
+    image: metalhead224/notify-svc:latest
+    build:
+      context: .
+      dockerfile: src/NotificationService/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+80
+      - RabbitMq__Host=rabbitmq # double underscore is used to nest inside a object exactly like in appsettings config file
+    ports:
+      - 7004:80
+    depends_on:
+      - rabbitmq
