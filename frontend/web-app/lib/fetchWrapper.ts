@@ -62,6 +62,9 @@ async function getHeaders() {
 
 async function handleResponse(response: Response) {
     const text = await response.text();
+
+    //in time of error it was only in text not in object so used try catch to format and handle accordingly.
+
     let data;
     try {
         data = JSON.parse(text);

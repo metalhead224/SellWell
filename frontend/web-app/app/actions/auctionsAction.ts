@@ -1,7 +1,6 @@
 'use server'
 
-import { auth } from "@/auth";
-import { PagedResult, Auction } from "../types/Index";
+import { PagedResult, Auction, Bid } from "../types/Index";
 import { fetchWrapper } from "@/lib/fetchWrapper";
 import { FieldValues } from "react-hook-form";
 import { revalidatePath } from "next/cache";
@@ -28,23 +27,10 @@ export async function deleteAuction(id: string) {
   return await fetchWrapper.del(`auctions/${id}`);
 }
 
-export async function updateAuctionTest() {
-  const data = {
-    mileage: Math.floor(Math.random() * 10000) + 1
-  }
+export async function getBidsForAuction(id: string): Promise<Bid[]> {
+  return await fetchWrapper.get(`bids/${id}`)
+}
 
-  const session = await auth();
-
-  const res = await fetch('http://localhost:6001/auctions/afbee524-5972-4075-8800-7d1f9d7b0a0c', {
-    method: 'PUT',
-    headers: {
-      'Content-type': 'application/json',
-      'Authorization': 'Bearer ' + session?.accessToken
-    },
-    body: JSON.stringify(data)
-  })
-
-  if (!res.ok) return {status: res.status, message: res.statusText}
-
-  return res.statusText;
+export async function placeBidForAuction(auctionId: string, amount: number) {
+  return await fetchWrapper.post(`bids?auctionId=${auctionId}&amount=${amount}`, {});
 }

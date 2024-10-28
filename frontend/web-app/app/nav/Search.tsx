@@ -25,14 +25,7 @@ export default function Search() {
     <div className="flex w-[50%] items-center border-2 rounded-full py-2 shadow-sm">
       <input
         className="
-                flex-grow 
-                border-none 
-                bg-transparent 
-                pl-5 
-                focus:border-transparent 
-                focus:bg-transparent 
-                focus:outline-none
-                focus:ring-0
+                input-custom
                 text-sm
                 text-gray-600
             "
@@ -43,7 +36,7 @@ export default function Search() {
           if (e.key === "Enter") search();
         }}
         value={searchValue}
-      />
+      />{/** here input-custom is the custom tailwind class that I made */}
       <button onClick={search}>
         <FaSearch
           size={34}
