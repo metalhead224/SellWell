@@ -5,7 +5,7 @@ import { useBidStore } from "@/hooks/useBidStore";
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import { useParams } from "next/navigation";
 import React, { ReactNode, useCallback, useEffect, useRef } from "react";
-import { Auction, AuctionFinished, Bid } from "../types/Index";
+import { Auction, AuctionFinished, Bid } from "../../types/Index";
 import { User } from "next-auth";
 import toast from "react-hot-toast";
 import AuctionCreatedToast from "../components/AuctionCreatedToast";

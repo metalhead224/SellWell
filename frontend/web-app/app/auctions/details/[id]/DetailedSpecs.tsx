@@ -1,6 +1,6 @@
 'use client';
 
-import { Auction } from "@/app/types/Index";
+import { Auction } from "@/types/Index";
 import {Table} from "flowbite-react";
 
 type Props = {

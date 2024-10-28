@@ -1,5 +1,5 @@
 import React from "react";
-import { Auction } from "../types/Index";
+import { Auction } from "../../types/Index";
 import Link from "next/link";
 import Image from "next/image";
 

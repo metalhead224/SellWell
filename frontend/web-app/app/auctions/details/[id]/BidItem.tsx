@@ -1,5 +1,5 @@
-import { Bid } from '@/app/types/Index'
-import { numberWithCommas } from '@/app/util/numberWithCommas';
+import { Bid } from '@/types/Index'
+import { numberWithCommas } from '@/app/lib/numberWithCommas';
 import { format } from 'date-fns';
 import React from 'react'
 
