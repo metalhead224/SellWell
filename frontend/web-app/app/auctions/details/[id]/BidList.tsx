@@ -2,7 +2,6 @@
 
 import { getBidsForAuction } from "@/app/actions/auctionsAction";
 import Heading from "@/app/components/Heading";
-import { Auction, Bid } from "@/types/Index";
 import { useBidStore } from "@/hooks/useBidStore";
 import { User } from "next-auth";
 import React, { useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import BidItem from "./BidItem";
 import { numberWithCommas } from "@/app/lib/numberWithCommas";
 import EmptyFilter from "@/app/components/EmptyFilter";
 import BidForm from "./BidForm";
+import { Auction, Bid } from "@/types/Index";
 
 type Props = {
   user: User | null;

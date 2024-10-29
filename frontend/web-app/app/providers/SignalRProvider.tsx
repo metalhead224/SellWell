@@ -5,19 +5,20 @@ import { useBidStore } from "@/hooks/useBidStore";
 import { HubConnection, HubConnectionBuilder } from "@microsoft/signalr";
 import { useParams } from "next/navigation";
 import React, { ReactNode, useCallback, useEffect, useRef } from "react";
-import { Auction, AuctionFinished, Bid } from "../../types/Index";
 import { User } from "next-auth";
 import toast from "react-hot-toast";
 import AuctionCreatedToast from "../components/AuctionCreatedToast";
 import { getDetailedViewData } from "../actions/auctionsAction";
 import AuctionFinishedToast from "../components/AuctionFinishedToast";
+import { Auction, AuctionFinished, Bid } from "@/types/Index";
 
 type Props = {
   children: ReactNode;
-  user: User | null
+  user: User | null;
+  notifyUrl: string;
 };
 
-export default function SignalRProvider({ children, user }: Props) {
+export default function SignalRProvider({ children, user, notifyUrl }: Props) {
   const connection = useRef<HubConnection | null>();
   const setCurrentPrice = useAuctionStore((state) => state.setCurrentPrice);
   const addBid = useBidStore((state) => state.addBid);
@@ -64,7 +65,7 @@ export default function SignalRProvider({ children, user }: Props) {
     if (!connection.current) {
       //we need to use current in order to get the value inside useRef hook.
       connection.current = new HubConnectionBuilder()
-        .withUrl("http://localhost:6001/notifications")
+        .withUrl(notifyUrl)
         .withAutomaticReconnect()
         .build();
 
@@ -83,7 +84,7 @@ export default function SignalRProvider({ children, user }: Props) {
         connection.current?.off("AuctionCreated", handleAuctionCreated);
         connection.current?.off("AuctionFinished", handleAuctionFinished);
     }    
-  }, [setCurrentPrice, handleBidPlaced, handleAuctionCreated, handleAuctionFinished]);
+  }, [setCurrentPrice, handleBidPlaced, handleAuctionCreated, handleAuctionFinished, notifyUrl]);
 
   return children;
 }

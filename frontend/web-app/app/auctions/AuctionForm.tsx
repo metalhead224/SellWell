@@ -8,7 +8,7 @@ import DateInput from "../components/DateInput";
 import { createAuction, updateAuction } from "../actions/auctionsAction";
 import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { Auction } from "../../types/Index";
+import { Auction } from "@/types/Index";
 
 type Props = {
   auction?: Auction;
@@ -33,7 +33,7 @@ export default function AuctionForm({ auction }: Props) {
       reset({ make, model, year, color, mileage });
     }
     setFocus("make");
-  }, [setFocus]);
+  }, [setFocus, auction, reset]);
 
   async function onSubmit(data: FieldValues) {
     let id = "";

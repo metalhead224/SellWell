@@ -20,13 +20,15 @@ export default async function RootLayout({
 }>) {
   const user = await getCurrentUser(); //we created this async function as it is server component
 
+  const notifyUrl = process.env.NOTIFY_URL;
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <ToasterProvider />
         <Navbar />
         <main className="container mx-auto px-5 pt-10">
-          <SignalRProvider user={user}>{children}</SignalRProvider>
+          <SignalRProvider user={user} notifyUrl={notifyUrl!}>{children}</SignalRProvider>
         </main>
       </body>
     </html>

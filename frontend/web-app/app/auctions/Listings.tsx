@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import AuctionsCard from "./AuctionsCard";
 import AppPagination from "../components/AppPagination";
-import { Auction, PagedResult } from "../../types/Index";
 import { getData } from "../actions/auctionsAction";
 import Filters from "./Filters";
 import { useParamsStore } from "@/hooks/useParamsStore";

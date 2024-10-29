@@ -1,8 +1,8 @@
 import React from "react";
-import { Auction, AuctionFinished } from "../../types/Index";
 import Link from "next/link";
 import Image from "next/image";
 import { numberWithCommas } from "../lib/numberWithCommas";
+import { AuctionFinished, Auction } from "@/types/Index";
 
 type Props = {
   finishedAuction: AuctionFinished;
