@@ -71,11 +71,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+80
-      - IssuerUri=http://localhost:5001
-      - ClientApp=http://localhost:3000
+      - IssuerUri=https://id.sellwell.local
+      - ClientApp=https://app.sellwell.local
       - ConnectionStrings__DefaultConnection=Server=postgres:5432; User Id=postgres; Password=postgrespw; Database=identity
-    ports:
-      - 5001:80
+      - VIRTUAL_HOST=id.sellwell.local #we haven't given virtual port here because it runs in port 80 internally.
     depends_on:
       - postgres
 
@@ -87,8 +86,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=http://+80
-    ports:
-      - 6001:80
+      - ClientApp=https://app.sellwell.local
+      - VIRTUAL_HOST=api.sellwell.local #we haven't given virtual port here because it runs in port 80 internally.
 
   bid-svc:
     image: metalhead224/bid-svc:latest
@@ -129,13 +128,23 @@ services:
       dockerfile: frontend/web-app/Dockerfile
     volumes:
       - /var/lib/web/data
-    ports:
-      - 3000:3000
     environment:
       - AUTH_SECRET="o8VBiuI8oyj/IJjgy20okQ0RQxtyxlDBNRJASvPr0vA="
-      - AUTH_URL=http://localhost:3000
+      - AUTH_URL=https://app.sellwell.local
       - AUTH_URL_INTERNAL=http://web-app:3000
       - API_URL=http://gateway-svc/
-      - ID_URL=http://localhost:5001
+      - ID_URL=https://id.sellwell.local
       - ID_URL_INTERNAL=http://identity-svc
-      - NOTIFY_URL=http://localhost:6001/notifications
+      - NOTIFY_URL=https://api.sellwell.local/notifications
+      - VIRTUAL_HOST=app.sellwell.local
+      - VIRTUAL_PORT=3000 #we are running this in port 3000 and we remove above ports which was 3000 and doesnot run in 80 we are assigning port here
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./devcerts:/etc/nginx/certs #location of ssl certificates
